@@ -1,0 +1,32 @@
+@import "styles/base";
+
+button,
+a {
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+  &:hover {
+    opacity: 0.9;
+  }
+  &.btn {
+    &-primary {
+      background-color: $white;
+      color: $primary-color;
+    }
+    &-secondary {
+      background-color: $secondary-color;
+      color: $white;
+    }
+    &-terciary {
+      background-color: $white;
+      color: $secondary-color;
+    }
+  }
+  &:disabled {
+    background-color: $strong-gray-color;
+    cursor: not-allowed;
+  }
+}

@@ -1,21 +1,44 @@
-
+@import "assets/font-awesome/scss/font-awesome.scss";
 @import "styles/base";
 
+body {
+  color: $secondary-color;
+}
+
 .App {
-  &-header{
-    &-logo{
-     max-width: 80px;
+  &-header {
+    &-logo {
+      max-width: 80px;
     }
   }
-  &-content{
-    padding: 1rem 4rem;
-    h3{
-      color: $primary-color;
+  &-content {
+    a {
+      font-weight: bold;
+      text-decoration: none;
     }
-    p{
+    section,
+    footer {
+      padding: 1rem 4rem;
+    }
+    h1::after {
+      content: "";
+      position: relative;
+      display: block;
+      height: 4px;
+      width: 40px;
+      margin-top: 10px;
+      background: $highlight-color;
+      will-change: transform, opacity;
       color: $secondary-color;
     }
-    .bye-bye{
+    h3 {
+      color: $primary-color;
+    }
+    p,
+    h4 {
+      color: $secondary-color;
+    }
+    .bye-bye {
       margin: 4rem 0 0;
       text-align: center;
       background: $terciary-color;
@@ -23,6 +46,31 @@
       color: #ababab;
       padding: 1rem;
       border-radius: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax($min-width-gird-col, 1fr));
+      gap: 16px;
+      img {
+        height: 250px;
+        object-fit: cover;
+      }
+      &.small {
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax($min-width-gird-col-small, 1fr)
+        );
+      }
+    }
+    .center {
+      text-align: center;
+    }
+    .right {
+      text-align: right;
+    }
+    .small {
+      font-size: $font-size-small;
+      color: $strong-gray-color;
     }
   }
 }

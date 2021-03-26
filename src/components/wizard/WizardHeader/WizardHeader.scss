@@ -1,0 +1,83 @@
+@import "styles/base";
+@import "assets/font-awesome/scss/font-awesome.scss";
+
+header {
+  height: 100px;
+  nav {
+    height: 100px;
+    width: 100%;
+    background-color: $light-gray-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0px -2px 4px -2px $shadow-color;
+    position: fixed;
+    overflow: hidden;
+    z-index: 999;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: $white;
+      font-weight: bold;
+      z-index: 1;
+      li {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        background-color: $strong-gray-color;
+        margin-right: 50px;
+        span {
+          width: 100%;
+          text-align: center;
+          line-height: 40px;
+        }
+      }
+      .active {
+        background-color: $secondary-color;
+        box-shadow: 0px 0px 4px 1px $shadow-color;
+        width: 50px;
+        height: 50px;
+        span {
+          line-height: 50px;
+        }
+        span:after {
+          content: " ";
+          display: block;
+          position: relative;
+          left: 0px;
+          top: -15px;
+          border: 25px solid;
+          border-color: transparent transparent $white transparent;
+        }
+      }
+      .filled {
+        background-color: $primary-color;
+        span {
+          font-family: FontAwesome;
+          content: $fa-var-exclamation-triangle;
+        }
+      }
+      li:last-child {
+        margin-right: 0px;
+      }
+    }
+    .separator {
+      background-color: $strong-gray-color;
+      height: 4px;
+      width: 70px;
+      position: fixed;
+      z-index: 0;
+      &:nth-of-type(1) {
+        margin-left: -100px;
+      }
+      &:nth-of-type(2) {
+        margin-left: 100px;
+      }
+      &.filled {
+        background-color: $primary-color;
+      }
+    }
+  }
+}
