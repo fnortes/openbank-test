@@ -7,5 +7,11 @@
 [lints]
 
 [options]
+emoji=true
+module.file_ext=.scss
+module.file_ext=.json
+module.file_ext=.js
+module.system.node.allow_root_relative=true
+module.system.node.root_relative_dirname=./src
 
 [strict]

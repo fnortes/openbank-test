@@ -1,30 +1,16 @@
-import React from "react";
-import { withTranslation } from "react-i18next";
-import "./messages.scss";
+// @flow
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { StyledMessageOk } from "./StyledMessage";
 
-/**
- * Common component used by FeedbackStep when the password creation is successfully.
- * 
- * @component
- * @example
- * return (
- *   <SuccessMessage />
- * )
- */
-const SuccessMessage = ({ t }) => {
+export default function SuccessMessage(): React.Node {
+  const { t } = useTranslation();
 
-  return (<>
-    <div className="messageIcon">
+  return (
+    <StyledMessageOk>
       <i className="fa fa-check-circle-o" aria-hidden="true" />
       <h1>{t("feedback.success.title")}</h1>
       <p>{t("feedback.success.paragraph")}</p>
-    </div>
-  </>);
-
-};
-
-SuccessMessage.propTypes = {};
-
-SuccessMessage.defaultProps = {};
-
-export default withTranslation()(SuccessMessage);
+    </StyledMessageOk>
+  );
+}

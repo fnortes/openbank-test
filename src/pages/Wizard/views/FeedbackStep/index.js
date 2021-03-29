@@ -1,31 +1,13 @@
-import React, { useContext } from "react";
-import WizardContext from "contexts/WizardContext";
+// @flow
+import * as React from "react";
+import useWizard from "hooks/useWizard";
 import SuccessMessage from "components/messages/SuccessMessage";
 import ErrorMessage from "components/messages/ErrorMessage";
 
-/**
- * Last Wizard step.
- * 
- * @component
- * @example
- * return (
- *   <FeedbackStep />
- * )
- */
-const FeedbackStep = () => {
+export default function FeedbackStep(): React.Node {
+  const { passMgrCreated } = useWizard();
 
-  const { passMgrCreated } = useContext(WizardContext);
-
-  return (<section>
-    {passMgrCreated
-      ? <SuccessMessage />
-      : <ErrorMessage />}
-  </section>);
-
-};
-
-FeedbackStep.propTypes = {};
-
-FeedbackStep.defaultProps = {};
-
-export default (FeedbackStep);
+  return (
+    <section>{passMgrCreated ? <SuccessMessage /> : <ErrorMessage />}</section>
+  );
+}

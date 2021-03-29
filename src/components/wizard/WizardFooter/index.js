@@ -1,70 +1,75 @@
-import React, { useContext } from "react";
-import { withTranslation } from "react-i18next";
-import PropTypes from 'prop-types';
+// @flow
+import * as React from "react";
 import { useLocation } from "wouter";
-import WizardContext from "contexts/WizardContext";
-import ButtonSecondary from "components/buttons/ButtonSecondary";
-import ButtonMain from "components/buttons/ButtonMain";
-import ButtonTerciary from "components/buttons/ButtonTerciary";
-import LinkTerciary from "components/buttons/LinkTerciary";
-import "./WizardFooter.scss";
+import { useTranslation } from "react-i18next";
+import useWizard from "hooks/useWizard";
+import Button from "components/buttons";
+import { PRIORITIES } from "components/buttons/StyledButton";
+import { STEPS } from "contexts/constants";
 
-/**
- * Used by Wizard component.
- * Represent the footer of Wizard.
- * 
- * @component
- * @example
- * const activeStep = 1
- * const setActiveStep = () => {}
- * return (
- *   <WizardFooter activeStep={activeStep} setActiveStep={setActiveStep}  />
- * )
- */
-const WizardFooter = ({ t, activeStep, setActiveStep }) => {
+type Props = {
+  className: string,
+};
 
+export default function WizardFooter({ className }: Props): React.Node {
   const [, pushLocation] = useLocation();
+  const { t } = useTranslation();
 
-  const { isValid, passMgrCreated } = useContext(WizardContext);
+  const {
+    activeStep,
+    isValid,
+    passMgrCreated,
+    goToPreviousStep,
+    setActiveStep,
+  } = useWizard();
 
-  const goToPreviousStep = () => {
+  const handleClickCancel = () => {
     if (activeStep === 1) {
       pushLocation("/");
     } else {
-      setActiveStep(prevActiveStep => prevActiveStep - 1);
+      goToPreviousStep();
     }
-  }
+  };
 
-  return (<footer className="grid small">
-    {activeStep < 3
-      ? <>
-        <ButtonSecondary onClick={goToPreviousStep}>{t("common.cancel")}</ButtonSecondary>
-        <ButtonMain align="right" disabled={!isValid}>{t("common.next")}</ButtonMain>
-      </>
-      : <>
-        <div></div>
-        {passMgrCreated
-          ? <LinkTerciary align="right" to="/">{t("common.access")}</LinkTerciary>
-          : <ButtonTerciary align="right"
-            onClick={() => setActiveStep(1)}>{t("common.returnPasswordManager")}</ButtonTerciary>}
-      </>}
-  </footer>);
-
-};
-
-WizardFooter.propTypes = {
-  /**
-   * Active step number.
-   */
-  activeStep: PropTypes.number.isRequired,
-  /**
-   * Callback to update the currentactive step.
-   */
-  setActiveStep: PropTypes.func.isRequired,
-};
-
-WizardFooter.defaultProps = {
-  activeStep: 1,
-};
-
-export default withTranslation()(WizardFooter);
+  return (
+    <footer className={`${className} grid small`}>
+      {activeStep < 3 ? (
+        <>
+          <Button priority={PRIORITIES.TERCIARY} onClick={handleClickCancel}>
+            {t("common.cancel")}
+          </Button>
+          <Button
+            align="right"
+            disabled={!isValid}
+            iconClass="fa-chevron-right"
+            type="submit"
+          >
+            {t("common.next")}
+          </Button>
+        </>
+      ) : (
+        <>
+          {passMgrCreated ? (
+            <Button
+              align="right"
+              priority={PRIORITIES.PRIMARY}
+              iconClass="fa-chevron-right"
+              to="/"
+            >
+              {t("common.access")}
+            </Button>
+          ) : (
+            <Button
+              align="right"
+              onClick={() => setActiveStep(STEPS[0])}
+              iconClass="fa-chevron-right"
+              priority={PRIORITIES.PRIMARY}
+            >
+              {t("common.returnPasswordManager")}
+            </Button>
+          )}
+        </>
+      )}
+    </footer>
+  );
+}

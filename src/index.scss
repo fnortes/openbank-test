@@ -1,6 +1,8 @@
+@import "assets/font-awesome/scss/font-awesome.scss";
+
 body {
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -8,4 +10,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.App {
+  &-header {
+    &-logo {
+      max-width: 80px;
+    }
+  }
 }

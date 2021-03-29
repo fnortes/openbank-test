@@ -1,30 +1,16 @@
-import React from "react";
-import { withTranslation } from "react-i18next";
-import "./messages.scss";
+// @flow
+import * as React from "react";
+import { useTranslation } from "react-i18next";
+import { StyledMessageKo } from "./StyledMessage";
 
-/**
- * Common component used by FeedbackStep when an error occurred in the password creation.
- * 
- * @component
- * @example
- * return (
- *   <ErrorMessage />
- * )
- */
-const ErrorMessage = ({ t }) => {
+export default function ErrorMessage(): React.Node {
+  const { t } = useTranslation();
 
-  return (<>
-    <div className="messageIcon error">
+  return (
+    <StyledMessageKo>
       <i className="fa fa-exclamation-triangle" aria-hidden="true" />
       <h1>{t("feedback.error.title")}</h1>
       <p>{t("feedback.error.paragraph")}</p>
-    </div>
-  </>);
-
-};
-
-ErrorMessage.propTypes = {};
-
-ErrorMessage.defaultProps = {};
-
-export default withTranslation()(ErrorMessage);
+    </StyledMessageKo>
+  );
+}

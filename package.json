@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.1.5",
     "i18next": "^17.0.16",
     "i18next-browser-languagedetector": "^3.0.3",
     "node-sass": "^4.12.0",

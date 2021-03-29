@@ -1,5 +1,6 @@
 // without options
 {"plugins": ["transform-class-properties"]}
+
 // with options
 {
   "plugins": [

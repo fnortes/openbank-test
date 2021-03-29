@@ -1,68 +1,56 @@
-import React, { useContext, useEffect, useState } from "react";
-import WizardContext from "contexts/WizardContext";
+// @flow
+import * as React from "react";
+import { useEffect } from "react";
+import useWizard from "hooks/useWizard";
 import useScrollTop from "hooks/useScrollTop";
 import { submitForm, RESPONSE_OK } from "services/api";
 import WizardHeader from "components/wizard/WizardHeader";
-import WizardFooter from "components/wizard/WizardFooter";
-
-// Define de steps number.
-const STEPS = [1, 2, 3];
+import { StyledWizardFooter } from "components/wizard/WizardFooter/StyledWizardFooter";
 
 // Load ProductInformation step in lazy mode.
-const LazyProductInformationStep = React.lazy(
-  () => import("./views/ProductInformationStep")
+const LazyProductInformationStep = React.lazy(() =>
+  import("./views/ProductInformationStep")
 );
 
 // Load Form step in lazy mode.
-const LazyFormStep = React.lazy(
-  () => import("./views/FormStep")
-);
+const LazyFormStep = React.lazy(() => import("./views/FormStep"));
 
 // Load Feedback step in lazy mode.
-const LazyFeedbackStep = React.lazy(
-  () => import("./views/FeedbackStep")
-);
+const LazyFeedbackStep = React.lazy(() => import("./views/FeedbackStep"));
 
-/**
- * Component wrapper of all Wizard functionality 
- * (Header navigation, footer buttons and all steps).
- * 
- * @component
- * @example
- * return (
- *   <Wizard />
- * )
- */
-const Wizard = () => {
-
-  const [activeStep, setActiveStep] = useState(STEPS[0]);
-
-  const { formValues,
-    isValid,
+export default function Wizard(): React.Node {
+  const {
+    formValues,
     setPassMgrCreated,
     setLoading,
-    reset
-  } = useContext(WizardContext);
+    isValid,
+    activeStep,
+    goToNextStep,
+    reset,
+  } = useWizard();
 
   useScrollTop(activeStep);
 
   useEffect(() => {
     reset();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [reset]);
 
-  const goToNextStep = () => {
-    setActiveStep(prevActiveStep => prevActiveStep + 1);
-  }
-
-  const handleOnSubmit = event => {
+  const handleOnSubmit = (event) => {
     event.preventDefault();
 
     if (activeStep === 2 && isValid) {
       setLoading(true);
-      submitForm(formValues.password, formValues.repeatPassword, formValues.hint)
-        .then(res => setPassMgrCreated(res.status === RESPONSE_OK.status))
-        .catch(() => setPassMgrCreated(false))
+      submitForm(
+        formValues.password,
+        formValues.repeatPassword,
+        formValues.hint
+      )
+        .then((res) => {
+          setPassMgrCreated(res.status === RESPONSE_OK.status);
+        })
+        .catch(() => {
+          setPassMgrCreated(false);
+        })
         .finally(() => {
           setLoading(false);
           goToNextStep();
@@ -70,28 +58,17 @@ const Wizard = () => {
     } else {
       goToNextStep();
     }
-  }
+  };
 
-  return (<>
-    <WizardHeader steps={STEPS} activeStep={activeStep} />
-    <form onSubmit={handleOnSubmit}>
-      {activeStep === 1 && (
-        <LazyProductInformationStep />
-      )}
-      {activeStep === 2 && (
-        <LazyFormStep />
-      )}
-      {activeStep === 3 && (
-        <LazyFeedbackStep />
-      )}
-      <WizardFooter activeStep={activeStep} setActiveStep={setActiveStep} />
-    </form>
-  </>);
-
-};
-
-Wizard.propTypes = {};
-
-Wizard.defaultProps = {};
-
-export default (Wizard);
+  return (
+    <>
+      <WizardHeader />
+      <form onSubmit={handleOnSubmit}>
+        {activeStep === 1 && <LazyProductInformationStep />}
+        {activeStep === 2 && <LazyFormStep />}
+        {activeStep === 3 && <LazyFeedbackStep />}
+        <StyledWizardFooter />
+      </form>
+    </>
+  );
+}

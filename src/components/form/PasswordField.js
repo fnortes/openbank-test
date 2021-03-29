@@ -1,38 +1,38 @@
-import React, { useState } from "react";
-import PropTypes from 'prop-types';
+// @flow
+import * as React from "react";
+import { useState } from "react";
 import InputField from "./InputField";
 
-/**
- * Common component to print a password input.
- * 
- * @component
- * @example
- * const children = {}
- * const name = ""
- * const placeholder = ""
- * const value = ""
- * const onChange = () => {}
- * const errors = {}
- * return (
- *  <PasswordField name={name} placeholder={placeholder} value={value} onChange={onChange} errors={errors}>
-      {children}
-    </PasswordField>
- * )
- */
-const PasswordField = ({
+const INPUT_TYPES = {
+  PASSWORD: "password",
+  TEXT: "text",
+};
+type Props = {
+  children: React.Node,
+  name: string,
+  placeholder: string,
+  value: any,
+  onChange: (event: SyntheticInputEvent<HTMLInputElement>) => void,
+  errors: React.MixedElement | null,
+};
+
+export default function PasswordField({
   children,
   name,
   placeholder,
   value,
   onChange,
-  errors
-}) => {
+  errors,
+}: Props): React.Node {
+  const [type, setType] = useState(INPUT_TYPES.PASSWORD);
 
-  const [type, setType] = useState("password");
-
-  const handleOnClick = () => {
-    setType(prevType => prevType === "password" ? "text" : "password");
-  }
+  const handleOnClick = (event: SyntheticEvent<HTMLElement>) => {
+    setType((prevType) =>
+      prevType === INPUT_TYPES.PASSWORD
+        ? INPUT_TYPES.TEXT
+        : INPUT_TYPES.PASSWORD
+    );
+  };
 
   return (
     <InputField
@@ -42,41 +42,15 @@ const PasswordField = ({
       value={value}
       onChange={onChange}
       errors={errors}
-      icon={<i className="inside fa fa-eye" aria-hidden="true" onClick={handleOnClick}></i>}
+      icon={
+        <i
+          className="inside fa fa-eye"
+          aria-hidden="true"
+          onClick={handleOnClick}
+        ></i>
+      }
     >
       {children}
     </InputField>
   );
-
-};
-
-PasswordField.propTypes = {
-  /**
-   * The label text.
-   */
-  children: PropTypes.any,
-  /**
-   * The input name.
-   */
-  name: PropTypes.string,
-  /**
-   * The input placeholder.
-   */
-  placeholder: PropTypes.string,
-  /**
-   * The input value.
-   */
-  value: PropTypes.any,
-  /**
-   * The handler for the onChange input event.
-   */
-  onChange: PropTypes.func,
-  /**
-   * The errors element, if necessary.
-   */
-  errors: PropTypes.element
-};
-
-PasswordField.defaultProps = {};
-
-export default (PasswordField);
+}
