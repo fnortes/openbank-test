@@ -30,7 +30,7 @@ export default function Home(): React.Node {
         <li>
           A pesar de que la estructura del proyecto estaba preparada con
           componentes de clase, y puesto que la versión de React lo permite, he
-          realizado todos los componentes como funciones, con el uso de
+          realizado todos los componentes como funciones, con el uso de{" "}
           <strong>Hooks</strong> y <strong>Context</strong> para un mejor
           rendimiento.
         </li>
@@ -44,15 +44,12 @@ export default function Home(): React.Node {
               react-router-dom, y bajo mi punto de vista más limpia de utilizar.
             </li>
             <li>
-              Para el tema de documentación, he añadido <strong>jsdoc</strong> y{" "}
-              <strong>better-docs</strong> (como dependecia de desarrollo), con
-              el fin de aprovechar los comentarios del propio código y montar
-              una interfaz web independiente en la que poder consultar todos los
-              componentes de la aplicación y su uso. Para lanzar bastaría con
-              ejecutar <strong>npm run docs</strong> (añadida al README.md del
-              proyecto). En la entrega, va incluida la carpeta docs generada,
-              por si hubiera algún problema, a pesar de que con comando anterior
-              se puede regenerar en cualquier momento.
+              Añadido <strong>Emotion</strong>, en su "sabor" de{" "}
+              <strong>Styled Components</strong>. Además hago uso del{" "}
+              <strong>ThemeProvider</strong>, que es un contexto que ofrece
+              Emotion para poder inyectar valores de estilos y que luegan puedan
+              ser utilizados a la hora de estilar cualquier componente que se
+              encuentre dentro de su árbol.
             </li>
           </ul>
         </li>
@@ -60,6 +57,10 @@ export default function Home(): React.Node {
           He añadido una pequeña configuración al <strong>jsconfig.json</strong>{" "}
           para cambiar el baseUrl y tener unas rutas en los imports del proyecto
           más limpias.
+        </li>
+        <li>
+          He utilizado <strong>Flow</strong>, de Facebook, para poder conseguir
+          un tipado en javascript.
         </li>
         <li>
           Aprovechando el añadido de un enrutador, he dejado como Home la página
@@ -72,11 +73,8 @@ export default function Home(): React.Node {
           uno de los 3 pasos del Wizard.
         </li>
         <li>
-          Respecto a estilos, aunque podría haber incorparado algún framework
-          tipo Bootstrap para partir de una base al hacer los layouts, he
-          preferido hacerlos todos a mano y desde cero, entiendo que era mejor
-          opción para el objetivo de la prueba (Salvo los estilos del Spinner,
-          que son copiados).
+          Respecto a estilos, he preferido hacerlos todos a mano y desde cero,
+          entiendo que era mejor opción para el objetivo de la prueba.
         </li>
         <li>
           En el Wizard, si se mete una contraseña que da KO en el api, el link
@@ -85,7 +83,15 @@ export default function Home(): React.Node {
           aceptar del paso 1, como todos los datos del paso 2). Soy consciente
           de que no sería lo ideal en una situación real, sobre todo por el tema
           tan delicado como son las contraseñas, pero decidí hacerlo así porque
-          me parecío muy práctico y usable a la hora de estar haciendo pruebas.
+          me parecío muy práctico y usable a la hora de estar haciendo pruebas y
+          como muestra de la potencia de utilizar un contexto.
+        </li>
+        <li>
+          Todo el código nuevo escrito en el proyecto está cubierto por test.
+          Aunque si se mira la cobertura, están no es tan alta al haber ficheros
+          no testeados, pero que no tienen nada que ver con el código
+          implementado en sí. De lo contrario, diría que la cobertura llegaría a
+          casí un 90%.
         </li>
       </ul>
       <Button
