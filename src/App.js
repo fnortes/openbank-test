@@ -5,7 +5,7 @@ import { Route } from "wouter";
 import { WizardContextProvider } from "contexts/WizardContext";
 import { Main } from "./Main";
 import Spinner from "components/Spinner";
-import { AppTheme } from "./styles";
+import { AppTheme } from "./AppTheme";
 
 // Load Home page in lazy mode.
 const LazyHome = React.lazy(() => import("pages/Home"));

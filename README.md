@@ -15,8 +15,4 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ## Notas de cosas pendientes:
 
-- Instalar Eslint y prettier
 - Hacer tests unitarios con buena cobertura > 80%.
-- Hacer tests automáticos y de integración
-- Dejar la aplicación corriendo en Vercel.
-- User react-helmet para la optimización SEO.

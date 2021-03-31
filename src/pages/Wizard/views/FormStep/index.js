@@ -63,8 +63,6 @@ export default function FormStep(): React.Node {
       </div>
       <p>{t("form.hint.paragraph")}</p>
       <TextField
-        className="max-fit"
-        type="text"
         name="hint"
         placeholder={t("form.hint.placeholder")}
         value={formValues.hint}
