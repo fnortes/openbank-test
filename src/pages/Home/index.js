@@ -91,7 +91,7 @@ export default function Home(): React.Node {
           Aunque si se mira la cobertura, están no es tan alta al haber ficheros
           no testeados, pero que no tienen nada que ver con el código
           implementado en sí. De lo contrario, diría que la cobertura llegaría a
-          casí un 90%.
+          casí un 90% (Si nos ceñimos al código del Wizard en sí).
         </li>
       </ul>
       <Button
